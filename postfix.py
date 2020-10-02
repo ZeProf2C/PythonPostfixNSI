@@ -12,7 +12,7 @@ def strToPostfix(string):
     postfixExpression = list()
 
     for i in string:
-        if int(i):
+        if type(i) == int:
             postfixExpression.append(int(i))
         else:
             postfixExpression.append(str(i))
