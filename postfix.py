@@ -4,15 +4,14 @@
 
 postfixe = [3, 4, 5, 6, "-", "*", "+"] #Expression à calculer, utiliser comme une pile
 postfixeCache = [] #Cache des nombres à calculer
-i = 0 #i reste à 0, on utilise ici une pile. On supprime en dépilant
 
 while len(postfixe) > 1:
-    while type(postfixe[i]) != str: #On dépile postfixe et on empile de postfixeCache 
-        postfixeCache.insert(0, postfixe[i])
-        postfixe.pop(i)
+    while type(postfixe[0]) != str: #On dépile postfixe et on empile de postfixeCache 
+        postfixeCache.insert(0, postfixe[0])
+        postfixe.pop(0)
 
-    expression = postfixe[i] #On dépile le calcul à réaliser dans une variable
-    postfixe.pop(i)
+    expression = postfixe[0] #On dépile le calcul à réaliser dans une variable
+    postfixe.pop(0)
 
 
     #On calcul et on empile dans postfixe
@@ -25,7 +24,7 @@ while len(postfixe) > 1:
     elif expression == "/":
         postfixe.insert(0, postfixeCache[0] / postfixeCache[1])
 
-    postfixeCache.pop(0) #On vide la pile de cache
+    postfixeCache.pop(0) #On enlève les deux derniers éléments de la pile de cache. On vient de les calculer
     postfixeCache.pop(0)
 
 
