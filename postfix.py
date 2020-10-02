@@ -2,7 +2,7 @@
 #[3, 4, 5, 6, "-", "*", "+"] = 7   [3, 4, "+", 5, "*", 6, "-"] = -29
 
 
-postfixe = [3, 4, "+", 5, "*", 6, "-"] #Expression à calculer, utiliser comme une pile
+postfixe = [3, 4, 5, 6, "-", "*", "+"] #Expression à calculer, utiliser comme une pile
 postfixeCache = [] #Cache des nombres à calculer
 i = 0 #i reste à 0, on utilise ici une pile. On supprime en dépilant
 
@@ -24,6 +24,9 @@ while len(postfixe) > 1:
         postfixe.insert(0, postfixeCache[0] * postfixeCache[1])
     elif expression == "/":
         postfixe.insert(0, postfixeCache[0] / postfixeCache[1])
+
+    postfixeCache.pop(0) #On vide la pile de cache
+    postfixeCache.pop(0)
 
 
 print(postfixe)
