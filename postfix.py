@@ -9,13 +9,13 @@
 
 def strToPostfix(string):
     string = list(string)
-    postfixExpression = list()
+    postfixExpression = []
 
     for i in string:
         if type(i) == int:
-            postfixExpression.append(int(i))
+            postfixExpression.append(i)
         else:
-            postfixExpression.append(str(i))
+            postfixExpression.append(i)
 
     return postfixExpression
 
@@ -55,3 +55,4 @@ def postfixe_eval(expression):
 print(postfixe_eval([3, 4, "+", 5, "*", 6, "-"]))
 print(postfixe_eval([3, 4, 5, 6, "-", "*", "+"]))
 print(strToPostfix("3456-*+"))
+print([3, 4, "+", 5, "*", 6, "-"])
