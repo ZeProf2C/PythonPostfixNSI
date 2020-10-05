@@ -10,11 +10,11 @@
 def strToPostfix(string):
     string = list(string)
     postfixExpression = []
-
     for i in string:
-        if type(i) == int:
-            postfixExpression.append(i)
-        else:
+        try:
+            int(i)
+            postfixExpression.append(int(i))
+        except ValueError:
             postfixExpression.append(i)
 
     return postfixExpression
@@ -22,6 +22,8 @@ def strToPostfix(string):
 
 def postfixe_eval(expression):
     if len(expression) == 0: return None #Si l'expression est vide, on ne va pas plus loin
+
+    if(type(expression) == str): expression = strToPostfix(expression) #Si c'est un str on le convertit en array
 
     postfixe = list(expression) #Expression à calculer, utiliser comme une pile. On copie le tableau.
     postfixeCache = list() #Cache des nombres à calculer
@@ -54,5 +56,4 @@ def postfixe_eval(expression):
 
 print(postfixe_eval([3, 4, "+", 5, "*", 6, "-"]))
 print(postfixe_eval([3, 4, 5, 6, "-", "*", "+"]))
-print(strToPostfix("3456-*+"))
-print([3, 4, "+", 5, "*", 6, "-"])
+print(postfixe_eval("3456-*+"))
