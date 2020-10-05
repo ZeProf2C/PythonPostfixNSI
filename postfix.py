@@ -51,7 +51,7 @@ def postfix_eval(expression):
         postfixCache.pop(0) #On enlève les deux derniers éléments de la pile de cache. On vient de les calculer
         postfixCache.pop(0)
 
-    postfix = int(postfix[0])
+    postfix = int(postfix[0]) #On retourne un entier. Il ne reste que l'élément 0 dans la pile
     return postfix
 
 print(postfix_eval([3, 4, "+", 5, "*", 6, "-"]))
