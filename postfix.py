@@ -53,7 +53,3 @@ def postfix_eval(expression):
 
     postfix = int(postfix[0]) #On retourne un entier. Il ne reste que l'élément 0 dans la pile
     return postfix
-
-print(postfix_eval([3, 4, "+", 5, "*", 6, "-"]))
-print(postfix_eval([3, 4, 5, 6, "-", "*", "+"]))
-print(postfix_eval("3456-*+"))
