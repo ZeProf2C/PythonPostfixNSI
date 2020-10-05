@@ -9,27 +9,27 @@
 
 def str_to_postfix(string):
     string = list(string)
-    postfixxpression = []
+    postfixExpression = []
     for i in string:
-        try:
+        try: #Test si l'élément est un entier, pour l'ajouter en tant que tel dans la liste
             int(i)
-            postfixxpression.append(int(i))
+            postfixExpression.append(int(i))
         except ValueError:
-            postfixxpression.append(i)
+            postfixExpression.append(i)
 
-    return postfixxpression
+    return postfixExpression
 
 
 def postfix_eval(expression):
     if len(expression) == 0: return None #Si l'expression est vide, on ne va pas plus loin
 
-    if(type(expression) == str): expression = str_to_postfix(expression) #Si c'est un str on le convertit en array
+    if(type(expression) == str): expression = str_to_postfix(expression) #Si c'est un str on le convertit en liste
 
-    postfix = list(expression) #Expression à calculer, utiliser comme une pile. On copie le tableau.
+    postfix = list(expression) #Expression à calculer, utiliser comme une pile. On copie le tableau pour ne pas le modifier.
     postfixCache = list() #Cache des nombres à calculer
 
     while len(postfix) > 1:
-        while type(postfix[0]) != str: #On dépile postfix et on empile de postfixCache 
+        while type(postfix[0]) != str: #On dépile postfix et on empile de postfixCache jusqu'a arriver à un opérateur
             postfixCache.insert(0, postfix[0])
             postfix.pop(0)
 
@@ -46,7 +46,7 @@ def postfix_eval(expression):
         elif operand == "/":
             postfix.insert(0, postfixCache[0] / postfixCache[1])
         else:
-            assert False, "Opérateur " + str(operand) +  " inconnu"
+            assert False, "Opérateur " + str(operand) +  " inconnu" 
 
         postfixCache.pop(0) #On enlève les deux derniers éléments de la pile de cache. On vient de les calculer
         postfixCache.pop(0)
