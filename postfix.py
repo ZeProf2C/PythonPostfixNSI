@@ -20,7 +20,7 @@ def str_to_postfix(string):
     return postfixExpression
 
 
-def postfix_eval(expression):
+def postfix_eval(expression): #Prends une expression postfixée et retourne le résultat en float
     if len(expression) == 0: return None #Si l'expression est vide, on ne va pas plus loin
 
     if(type(expression) == str): expression = str_to_postfix(expression) #Si c'est un str on le convertit en liste
@@ -51,5 +51,5 @@ def postfix_eval(expression):
         postfixCache.pop(0) #On enlève les deux derniers éléments de la pile de cache. On vient de les calculer
         postfixCache.pop(0)
 
-    postfix = float(postfix[0]) #On retourne un entier. Il ne reste que l'élément 0 dans la pile
+    postfix = float(postfix[0]) #On retourne un float. Il ne reste que l'élément 0 dans la pile
     return postfix
