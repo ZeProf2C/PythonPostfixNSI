@@ -7,16 +7,18 @@
 # -*- coding: utf-8 -*-
 #[3, 4, 5, 6, "-", "*", "+"] = 7   [3, 4, "+", 5, "*", 6, "-"] = -29
 
+def good_bracket(expression):
+    bracketCache
+
 def str_to_postfix(string):
-    string = list(string)
-    postfixExpression = []
+    string = string.split(",")
+    postfixExpression = list()
     for i in string:
         try: #Test si l'élément est un entier, pour l'ajouter en tant que tel dans la liste
             float(i)
             postfixExpression.append(float(i))
         except ValueError: #Sinon c'est un str
             postfixExpression.append(i)
-
     return postfixExpression
 
 
