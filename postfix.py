@@ -7,8 +7,8 @@
 # -*- coding: utf-8 -*-
 #[3, 4, 5, 6, "-", "*", "+"] = 7   [3, 4, "+", 5, "*", 6, "-"] = -29
 
-def bracket_verify(string):
-    bracketOpenCount = 0
+def bracket_verify(string): #verifie le bon placement des parenthèses dans une expression type unfix
+    bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1
 
     for i in string:
         if i == "(":
@@ -16,7 +16,7 @@ def bracket_verify(string):
         elif i == ")":
             bracketOpenCount -= 1
 
-    if bracket_verify == 0: 
+    if bracketOpenCount == 0: 
         return True
     else:
         return False
