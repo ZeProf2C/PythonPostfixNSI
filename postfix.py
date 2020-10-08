@@ -7,10 +7,21 @@
 # -*- coding: utf-8 -*-
 #[3, 4, 5, 6, "-", "*", "+"] = 7   [3, 4, "+", 5, "*", 6, "-"] = -29
 
-def good_bracket(expression):
-    bracketCache
+def bracket_verify(string):
+    bracketOpenCount = 0
 
-def str_to_postfix(string):
+    for i in string:
+        if i == "(":
+            bracketOpenCount += 1
+        elif i == ")":
+            bracketOpenCount -= 1
+
+    if bracket_verify == 0: 
+        return True
+    else:
+        return False
+
+def str_to_expression(string):
     string = string.split(",")
     postfixExpression = list()
     for i in string:
@@ -25,7 +36,7 @@ def str_to_postfix(string):
 def postfix_eval(expression): #Prends une expression postfixée et retourne le résultat en float
     if len(expression) == 0: return None #Si l'expression est vide, on ne va pas plus loin
 
-    if(type(expression) == str): expression = str_to_postfix(expression) #Si c'est un str on le convertit en liste
+    if(type(expression) == str): expression = str_to_expression(expression) #Si c'est un str on le convertit en liste
 
     postfix = list(expression) #Expression à calculer, utiliser comme une pile. On copie le tableau pour ne pas le modifier.
     postfixCache = list() #Cache des nombres à calculer
