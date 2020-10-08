@@ -5,7 +5,6 @@
 #==============================================================================
 
 # -*- coding: utf-8 -*-
-#[3, 4, 5, 6, "-", "*", "+"] = 7   [3, 4, "+", 5, "*", 6, "-"] = -29
 
 def bracket_verify(string): #verifie le bon placement des parenthèses dans une expression type unfix
     bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1
