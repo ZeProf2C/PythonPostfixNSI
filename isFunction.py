@@ -11,8 +11,14 @@ def isEmpty(a):
     else:
         return True
 
-def isBracketCorrect(string): #verifie le bon placement des parenthèses dans une expression type unfix
-    bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1
+def isStr(a):
+    if type(a) == str:
+        return True
+    else:
+        return False
+
+def isBracketCorrect(string): #verifie le bon placement des parenthèses dans une expression type infix
+    bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1. On doit arriver a 0
 
     for i in string:
         if i == "(":
