@@ -6,24 +6,17 @@
 
 # -*- coding: utf-8 -*-
 
-def str_to_expression(string): #prend un str sous forme 2,+,13 pour en faire un tableau avec des bons type
-    string = string.split(",")
-    postfixExpression = list()
-    for i in string:
-        try: #Test si l'élément est un entier, pour l'ajouter en tant que tel dans la liste
-            float(i)
-            postfixExpression.append(float(i))
-        except ValueError: #Sinon c'est un str
-            postfixExpression.append(i)
-    return postfixExpression
-
+from isFunction import *
 
 def postfix_eval(expression): #Prends une expression postfixée et retourne le résultat en float
     if len(expression) == 0: return None #Si l'expression est vide, on ne va pas plus loin
 
-    if(type(expression) == str): expression = str_to_expression(expression) #Si c'est un str on le convertit en liste
-
-    postfix = list(expression) #Expression à calculer, utiliser comme une pile. On copie le tableau pour ne pas le modifier.
+    if type(expression) == str: #Convertit le str en list et en fait une copie. Permet de gerer les nombres
+        postfix = list(expression.split(",")) 
+    else:
+        postfix = list(expression) #Expression à calculer, utiliser comme une pile. On copie le tableau pour ne pas le modifier.
+    
+    postfix = postfix_correct_type(postfix)
     postfixCache = list() #Cache des nombres à calculer
 
     while len(postfix) > 1:
@@ -52,6 +45,16 @@ def postfix_eval(expression): #Prends une expression postfixée et retourne le r
     postfix = float(postfix[0]) #On retourne un float. Il ne reste que l'élément 0 dans la pile
     return postfix
     
+def postfix_correct_type(postfixExpression):
+    postfixCorrect = list()
+    for i in postfixExpression: #S'assure du type des elements
+        try: #Test si l'élément est un entier, pour l'ajouter en tant que tel dans la liste
+            float(i)
+            postfixCorrect.append(float(i))
+        except ValueError: #Sinon c'est un str
+            postfixCorrect.append(i)
+    return postfixCorrect
+
 
 def infix_to_postfix(infix):
     infix = infix.replace(" ", "") #Supprime les espaces si il y en a
@@ -63,7 +66,6 @@ def infix_to_postfix(infix):
     cache = list() #Sert de cache pour les operateurs dans l'ordre de priorité
 
     for element in infix:
-        print(element)
         if isToken(element): #Si l'element est un nombre ou une lettre, on l'ajoute à l'expression postfixée
             postfix.append(element)
         elif element == "(":
@@ -86,31 +88,3 @@ def infix_to_postfix(infix):
 
     postfix = ",".join(postfix) #Retourne une expression plutôt qu'un tableau
     return postfix
-
-
-def isToken(char):
-    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    if char in letters.upper() or char in letters.lower() or char.isnumeric():
-        return True
-    else:
-        return False
-
-def isEmpty(a):
-    if len(a) > 0:
-        return False
-    else:
-        return True
-
-def isBracketCorrect(string): #verifie le bon placement des parenthèses dans une expression type unfix
-    bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1
-
-    for i in string:
-        if i == "(":
-            bracketOpenCount += 1
-        elif i == ")":
-            bracketOpenCount -= 1
-
-    if bracketOpenCount == 0: 
-        return True
-    else:
-        return False
