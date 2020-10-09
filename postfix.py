@@ -6,21 +6,7 @@
 
 # -*- coding: utf-8 -*-
 
-def bracket_verify(string): #verifie le bon placement des parenthèses dans une expression type unfix
-    bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1
-
-    for i in string:
-        if i == "(":
-            bracketOpenCount += 1
-        elif i == ")":
-            bracketOpenCount -= 1
-
-    if bracketOpenCount == 0: 
-        return True
-    else:
-        return False
-
-def str_to_expression(string):
+def str_to_expression(string): #prend un str sous forme 2,+,13 pour en faire un tableau avec des bons type
     string = string.split(",")
     postfixExpression = list()
     for i in string:
@@ -65,3 +51,66 @@ def postfix_eval(expression): #Prends une expression postfixée et retourne le r
 
     postfix = float(postfix[0]) #On retourne un float. Il ne reste que l'élément 0 dans la pile
     return postfix
+    
+
+def infix_to_postfix(infix):
+    infix = infix.replace(" ", "") #Supprime les espaces si il y en a
+    assert isBracketCorrect(infix), print(isBracketCorrect(infix)) 
+    infix = infix.split(",") #Convertit le str en list. Permet de gerer les nombres
+
+    operandPriority = {"(": 0, ")": 0, "+": 1, "-": 1, "*": 2, "/": 2} #Poids des opérateurs pour les priorités de caculs
+    postfix = list()
+    cache = list() #Sert de cache pour les operateurs dans l'ordre de priorité
+
+    for element in infix:
+        print(element)
+        if isToken(element): #Si l'element est un nombre ou une lettre, on l'ajoute à l'expression postfixée
+            postfix.append(element)
+        elif element == "(":
+            cache.append(element)
+        elif element == ")": #Ajoute tout les operateurs dans la parenthèse
+            last = cache.pop()
+            while last != "(":
+                postfix.append(last)
+                last = cache.pop()
+        else: #Si l'element est un operateur
+            while (not isEmpty(cache)) and operandPriority[cache[-1]] >= operandPriority[element]: #Si il y a un operateurs dans cache et que sa priorité est plus importante que l'element 
+                last = cache.pop()
+                postfix.append(last) #On met l'operateur dans postfix
+            
+            cache.append(element) #on ajoute l'operateur dans le cache
+
+    while not isEmpty(cache): #On vide le cache d'operateur dans l'expression
+        last = cache.pop()
+        postfix.append(last)
+
+    postfix = ",".join(postfix) #Retourne une expression plutôt qu'un tableau
+    return postfix
+
+
+def isToken(char):
+    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if char in letters.upper() or char in letters.lower() or char.isnumeric():
+        return True
+    else:
+        return False
+
+def isEmpty(a):
+    if len(a) > 0:
+        return False
+    else:
+        return True
+
+def isBracketCorrect(string): #verifie le bon placement des parenthèses dans une expression type unfix
+    bracketOpenCount = 0 #Chaque parenthèses ouvrante ajoute 1, chaque fermante retire 1
+
+    for i in string:
+        if i == "(":
+            bracketOpenCount += 1
+        elif i == ")":
+            bracketOpenCount -= 1
+
+    if bracketOpenCount == 0: 
+        return True
+    else:
+        return False
